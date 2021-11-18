@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dongguk Bachelor - User</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/static/css/chat.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/CallCenter/index">
+                <div class="sidebar-brand-text mx-3">Dongguk Bachelor Counselor</div>
+            </a>
+
+            <div style="height:200px;width:1px;"></div>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                   <!-- Topbar Navbar -->
+                   <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ username }}</span>
+                            <img class="img-profile rounded-circle"
+                                src="/static/img/undraw_profile.svg">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">동국대학교 AI 학사 협업 시스템</h1>
+                    </div>
+                    <!-- Content Row -->
+                    <div class="row">
+                        <!-- Content Column -->
+                        <div class="col-x1-6 col-lg-6 mb-6">
+                            <div class="container">
+                                <div class="messaging">
+                                    <div class="inbox_msg">
+                                        <div class="inbox_people">
+                                            <div class="inbox_chat">
+                                                {% for QnA in QnAList %}
+                                                <div class="chat_list">
+                                                    <div class="chat_people">
+                                                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                        <div class="chat_ib">
+                                                            <h5>{{user.1}} <span class="chat_date">{{QnA.0.0}}</span></h5>
+                                                            <p>{{QnA.1.0.0}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="mesgs" style="font-size:16px">
+                                            <div class="msg_history" id="chatBox">
+                                                
+                                            </div>
+                                        </div>                                        
+                                    </div>      
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-x1-6 col-lg-6 mb-6">
+                            <div class="row">
+                                <div class="col-x1-6 col-lg-6 mb-6" >
+                                    <div class="well profile col-lg-12" style="background-color:#32B67A;height:50%;border-radius: 16px;color:#F9F7E8;margin:0px; padding:0px">
+                                        <div class="col-lg-12 text-center">
+                                            <figure>
+                                                <img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle" style="width:75px;" id="user-img">
+                                            </figure>
+                                            <div style="width:400px;height:40px"><div style="text-align:left;width:100px;float:left;font-size: 20px;">학생 이름</div><div id="user-name" style="text-align:left;padding-left: 20px;float:left;width:300px;font-size:15px;">{{user.1}}</div></div>
+                                            <div style="width:400px;height:40px"><div style="text-align:left;width:100px;float:left;font-size: 20px;">학&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;번</div><div id="user-name" style="text-align: left;padding-left: 20px;float:left;width:300px;font-size:15px;">{{user.0}}</div></div>
+                                            <div style="width:400px;height:40px"><div style="text-align:left;width:100px;float:left;font-size: 20px;">이&nbsp;메&nbsp;일</div><div id="user-name" style="text-align: left;padding-left: 20px;float:left;width:300px;font-size:15px;">{{user.7}}</div></div>
+                                            <div style="width:400px;height:40px"><div style="text-align:left;width:100px;float:left;font-size: 20px;">전화번호</div><div id="user-name" style="text-align: left;padding-left: 20px;float:left;width:300px;font-size:15px;">{{user.8}}</div></div>
+                                            <div style="width:400px;height:40px"><div style="text-align:left;width:100px;float:left;font-size: 20px;">학&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년</div><div id="user-name" style="text-align: left;padding-left: 20px;float:left;width:300px;font-size:15px;">{{user.2}}학년</div></div>
+                                            <div style="width:400px;height:40px"><div style="text-align:left;width:100px;float:left;font-size: 20px;">전&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공</div><div id="user-name" style="text-align: left;padding-left: 20px;float:left;width:300px;font-size:15px;">{{user.3}}</div></div>
+                                        </div>
+                                    </div>
+                                    <div  style="background-color:#F1C3B8;height:50% ;border-radius: 16px;color:#1C237E;margin:0px; padding:30px;margin-top:100px">
+                                        <h4>최근 상담 현황</h4>
+                                        {% for QnA in QnAList %}
+                                        <p>{{QnA.0.0}}<a href="#" class="btn-btn-default" style="margin-left:100px;color:FEF9EF;background-color:#FF865E;padding:5px;border-radius: 10px;"><span class="glyphicon glyphicon-arrow-right"></span>바로가기</a></p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-x1-6 col-lg-6 mb-6 phone-off" id="phone-off" style="text-align: center;">
+                                    <div style="width:250px; height:300px;margin-top: 30%;background-color: white;display:inline-block">
+                                        <div style="width:250px; height:50px;text-align: center;font-size:30px;color:#FF3B30">전화 종료</div>
+                                        <img src="/static/img/off.png" style="width:250px;height:250px">
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>                                     
+                    </div> 
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div style="float:left">
+                        <img src="/static/img/dgu_logo2.jpg" style="height:42px;width:134px;">
+                    </div>
+                    <div class="copyright my-auto" style="align-items:left;float:left;font-size:9px;">
+                        <span>서울캠퍼스 : (04620) 서울특별시 중구 필동로 1길 30 (필동3가 26) Tel.02-2260-3114 Fax.02-2277-1274</span></br>
+                        <span>경주캠퍼스 : (38066) 경상북도 경주시 동대로 123 동국대학교 경주캠퍼스 Tel.054-770-2114 Fax.054-770-2001</span></br>
+                        <span>COPYRIGHT (c)2017 DONGGUK UNIVERSITY SINCE 1906.ALL RIGHTS RESERVED</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">종료하시겠습니까?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">로그아웃 하시려면 Logout 버튼을 눌러주세요</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/CallCenter/login">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+    <script>
+        document.addEventListener("keypress", enterSearch, false);
+        var checker = true;
+        function enterSearch(e) {
+            if(window.event.keyCode == 13) {
+                $.ajax({
+                    url : "{% url 'chat' %}" ,
+                    type:'POST',
+                    data : '',
+                    success:function(data){
+                        checker = data.checker;
+                        if(checker){
+                            var box = $('<div class="incoming_msg"><div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div><div class="received_msg"><div class="received_withd_msg"><p>'+ data.question + '</p></div></div></div><div class="outgoing_msg"><div class="sent_msg"><p>' + data.answer + '</p></div></div>');
+                            $('#chatBox').append(box);
+                        }else{
+                            var box = $('<div class="outgoing_msg"><div class="sent_msg"><p>' + data.answer + '</p></div></div>');
+                            $('#chatBox').append(box);
+                        }
+                        
+
+                    },
+                    error: function(){
+
+                    }
+                })
+            }
+        };
+
+        $("#phone-off").click(function(){
+            location.href='/CallCenter/counselor/';
+        });
+    </script>
+
+</body>
+
+</html>

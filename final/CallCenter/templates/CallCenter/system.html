@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dongguk Bachelor - System</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/CallCenter/index">
+                <div class="sidebar-brand-text mx-3">Dongguk Bachelor Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/CallCenter/index">
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Administrator
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>고객 관리</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">고객 관리:</h6>
+                        <a class="collapse-item" href="/CallCenter/user_info">고객 정보 관리</a>
+                        <a class="collapse-item" href="/CallCenter/data">학습 데이터 관리</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>시스템 관리</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">시스템 관리:</h6>
+                        <a class="collapse-item" href="/CallCenter/outbound">발송 예정 관리</a>
+                        <a class="collapse-item" href="/CallCenter/system">학사 관리</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                     <!-- Topbar Navbar -->
+                     <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ username }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="/static/img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">동국대학교 AI 학사 협업 시스템</h1>
+                    </div>
+                    
+                    
+                    
+                    <!-- Content Row -->
+                    <div class="row" style = "height: 100%" method="POST">
+						<div style = "width: 33%; background-color: #4e73df; float:right; padding: 5px 5px 5px 5px; text-align: center;">
+							<br>
+							<h1 style = "text-align: center; margin: 10px 10px 10px 10px; color: White;">
+								<font style = "color: White; font-weight: 900;">상담원 정보 수정 및 삭제</font>
+							</h2>
+							<br><br>
+							<div style = "border-radius: 10px; border: 5px solid black; margin: 10px 10px 10px 10px; background-color: White">
+							<br><br>
+			                    <form action="/CallCenter/system" method = "GET">
+			                    	<font style = "color: Black; font-weight: 900;">계정 번호: </font><input type="text" name="NUM" value="">
+			                    	<br><font style = "color: Black; font-size: 12px;">(계정 추가 시 0, 계정 삭제 및 수정 시 해당 계정 번호 입력)</font><br><br>
+			                    	<font style = "color: Black; font-weight: 900;">상담사 ID: </font><input type="text" name="ID" value="새 ID 입력"><br><br>
+			                    	<font style = "color: Black; font-weight: 900;">상담사 PW: </font><input type="text" name="PW" value="새 PW 입력"><br><br>
+			                    	<font style = "color: Black; font-weight: 900;">상담사 등급: </font><input type="text" name="GRADE" value="새 등급 입력"><br><br>
+			                    	<br><br>
+			                    	<input type="submit" value="수정/추가" name = "change">
+			                    	<input type="submit" value="삭제" name = "delete">
+			                    </form>
+			                    <br><br>
+		                    </div>
+		                </div>
+	                    <div style = "width: 66%;float:left;height:800px;overflow-y:scroll;">
+		                    <table class="table table-bordered table-style table-responsive" 
+		                    	style = "margin-left:10%; width:80%; text-align: center;">
+		                    		<thead>
+		                    			<tr>
+		                    				<th colspan = "3" class = "h4 mb-0 text-gray-800"> 등록 상담사 정보 리스트</th>
+		                    			</tr>
+			                    		<tr>
+			                    			<th>계정 번호</th>
+			                    			<th>ID</th>
+			                    			<th>PW</th>
+			                    			<th>등급</th>
+			                    		</tr>
+		                    		</thead>
+		                    		<tbody>
+									{% for i in user.user %}
+										<tr>
+											<td style = "height: 50px;">{{i.0}}</td>
+											<td style = "height: 50px;">{{i.1}}</td>
+											<td style = "height: 50px;">{{i.2}}</td>
+                                            {% if i.3 == 1 %}
+                                                <td style = "height: 50px;">counselor</td>
+                                            {% endif %}
+                                            {% if i.3 == 0 %}
+                                                <td style = "height: 50px;">admin</td>
+                                            {% endif %}											
+										</tr>
+									{% endfor %}
+									{% if user.count <= 10 %}
+										{% for i in ""|rjust:user.all %}
+											<tr>
+												<td style = "height: 50px;"></td>
+												<td style = "height: 50px;"></td>
+												<td style = "height: 50px;"></td>
+												<td style = "height: 50px;"></td>
+											</tr>
+										{% endfor %}
+									{% endif %}
+									</tbody>
+							</table>
+						</div>
+                	</div>
+                <!-- /.container-fluid -->
+
+            	</div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div style="float:left">
+                        <img src="/static/img/dgu_logo2.jpg" style="height:42px;width:134px;">
+                    </div>
+                    <div class="copyright my-auto" style="align-items:left;float:left;font-size:9px;">
+                        <span>서울캠퍼스 : (04620) 서울특별시 중구 필동로 1길 30 (필동3가 26) Tel.02-2260-3114 Fax.02-2277-1274</span></br>
+                        <span>경주캠퍼스 : (38066) 경상북도 경주시 동대로 123 동국대학교 경주캠퍼스 Tel.054-770-2114 Fax.054-770-2001</span></br>
+                        <span>COPYRIGHT (c)2017 DONGGUK UNIVERSITY SINCE 1906.ALL RIGHTS RESERVED</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">종료하시겠습니까?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">로그아웃 하시려면 Logout 버튼을 눌러주세요</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/CallCenter/login">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/static/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/static/js/demo/chart-area-demo.js"></script>
+    <script src="/static/js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
