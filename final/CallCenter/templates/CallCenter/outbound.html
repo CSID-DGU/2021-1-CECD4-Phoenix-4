@@ -168,10 +168,12 @@
                                 <div style="color: black;font-size:20px;background-color: #68C170; padding: 20px;margin-top:5px ;border-radius: 10px;">
                                 	발송일 리스트</div>
                                 <div style="color: #865439;background-color:#D6EC8C; padding: 20px;margin-top:10px;border-radius: 10px;">
-	                                <form action="/CallCenter/outbound" method = "GET" style = "height: 350px">
-	                                <div style = "overflow-y: auto;">
+	                                <form action="/CallCenter/outbound" method = "GET" style = "height-min: 350px">
+	                                <div style = "overflow-y: scroll;">
+	                                {% if otb.point != -1 %}
 	                                {% if otb.step == 2 or otb.step == 3 %}
-	                                    <input type="submit" name = "selected" value = "선택"><br><br>
+	                                    <input type="submit" name = "selected" value = "선택">
+	                                    <input type="submit" name = "listed" value = "발송 정보 출력"><br><br>
 	                                {% for i in otb.result %}
 	                                    <div >
 	                                	<p style="text-overflow: ellipsis;  overflow: hidden; white-space: nowrap; 
@@ -180,6 +182,18 @@
 	                                	</p>
 	                                    </div>
 	                                {% endfor %}
+	                                {% endif %}
+	                                {% else %}
+	                                	발송 번호 리스트<br>
+	                                	<textarea name = "list" style="height:100px; overflow-y: scroll;
+	                                	 width: 100%; white-space: pre-wrap;" disabled>{% for i in tel %}{{i.0}}
+{% endfor %}</textarea>
+	                                	{{otb.date}}일 발송 내용<br>
+	                                	<textarea name = "mail" style="height:200px; overflow-y: scroll;
+	                                	 width: 100%; white-space: pre-wrap;" disabled>{{text}}</textarea>
+	                                	 <input type = "submit" name = "prev" value = "이전">
+	                                	 {{now}}/{{sum}}
+	                                	 <input type = "submit" name = "next" value = "다음">
 	                                {% endif %}
 	                                </div>
 	                                </form>
