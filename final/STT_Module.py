@@ -101,10 +101,6 @@ class STTModule:
                 else:
                     count = 0
 
-            self.stream.stop_stream()
-            self.stream.close()
-            self.audio.terminate()
-
             self.WAVE_OUTPUT_FILENAME = "Voice" + str(now.tm_hour) + "_" + str(now.tm_min) + "_"+ str(now.tm_sec)+".wav"
             
             waveFile = wave.open(self.directory +  "/" +self.WAVE_OUTPUT_FILENAME, 'wb')
@@ -130,9 +126,9 @@ class STTModule:
             Secret = "your_secret"
 
             headers = {
-                "Content-Type": "application/octet-stream",
-                "X-NCP-APIGW-API-KEY-ID": "",
-                "X-NCP-APIGW-API-KEY": ""
+                "Content-Type": "###",
+                "X-NCP-APIGW-API-KEY-ID": "###",
+                "X-NCP-APIGW-API-KEY": "###",
             }
 
             response = requests.post(URL, data=data,headers=headers)

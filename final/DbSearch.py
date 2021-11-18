@@ -4,11 +4,11 @@ import pymysql
 class DbSearcher:
     def __init__(self):
         #db connect setting
-        host = ""
-        port = 3306
-        username = ""
-        database = ""
-        password = ""
+        host = "###"
+        port = "###"
+        username = "###"
+        database = "###"
+        password ="###"
 
         self.conn = pymysql.connect(host = host, user = username, passwd = password, db= database, port = port)
         self.cur = self.conn.cursor()

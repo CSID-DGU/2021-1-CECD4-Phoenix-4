@@ -12,7 +12,6 @@ class TTSModule:
         self.ttsResult = None
         
         self.directory = str(now.tm_year) + "_" + str(now.tm_mon) + "_" + str(now.tm_mday)
-        self.WAVE_OUTPUT_FILENAME = "RETVoice" + str(now.tm_hour) + "_" + str(now.tm_min) + "_"+ str(now.tm_sec)+".mp3"
                     
         if not os.path.exists(self.directory):
             os.makedirs(self.directory)
@@ -20,10 +19,12 @@ class TTSModule:
         print("Today's data directory: " + self.directory + "\n")
             
     def tts(self, quotation):
+        now = time.localtime()
+        self.WAVE_OUTPUT_FILENAME = "RETVoice" + str(now.tm_hour) + "_" + str(now.tm_min) + "_"+ str(now.tm_sec)+".mp3"
         # recieve text quotes from chatbot, get mp3 from outer API  
         try:
-            client_id = ""
-            client_secret = ""
+            client_id = "###"
+            client_secret = "###"
             outFilename = self.WAVE_OUTPUT_FILENAME
             encText = urllib.parse.quote(quotation)
             
