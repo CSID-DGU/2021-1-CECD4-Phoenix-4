@@ -15,14 +15,16 @@ import DbSearch
 import time
 # Create your views here.
 
+global otb
 global user_name
 user_name = ""
 chat = []
 
+global stt
+global tts
 
-
-
-
+stt = None
+tts = None
 
 def index(request):
     cursor = connection.cursor()
@@ -44,6 +46,8 @@ def index(request):
     return render(request, 'CallCenter/index.html', context)
 
 def counselor(request):
+    global stt
+
     cursor = connection.cursor()
     strSql = "select * from AICALLCENTER.COUNSELEEINFO WHERE a_id = '" + str(user_name) + "';"
     cursor.execute(strSql)
@@ -52,9 +56,17 @@ def counselor(request):
         'username':user_name,
         'admin_info' : admin_info,
     }
+
+    if stt != None:
+        stt.closeStt()
+
+    if stt != None:
+        stt.closeStt()
+
     return render(request, 'CallCenter/counselor.html', context)
 
 def counseling(request, user_id):
+    global tts
     cursor = connection.cursor()
     strSql = "select * from AICALLCENTER.STUDENTINFO WHERE studentID = '" + str(user_id) + "';"
     cursor.execute(strSql)
@@ -83,15 +95,16 @@ def counseling(request, user_id):
         'user' : user,
         'QnAList' : data,
     }
+
+    chatStart(tts)
+
     return render(request, 'CallCenter/counseling.html', context)    
 
 @csrf_exempt
 def chat(request):
+    global stt
+    global tts
     question = ""
-    stt = STT_Module.STTModule()
-    stt.setAudioType(1)
-    stt.noTalkingSetting()
-    tts = TTS_Module.TTSModule()
     try:
         stt.recording()
         stt.stt()
@@ -115,15 +128,16 @@ def chat(request):
             'answer' : "죄송한데 잘 이해하지 못했어요",
             'checker' : False
         }
-    del stt
-    del tts
-    del chatBot
     return JsonResponse(context)
 
-
+def chatStart(tts):
+    tts.tts("상담 내용을 말해주세요")
+    tts.resultPlay()
 
 @csrf_exempt
 def phonecall(request):
+    global stt
+    global tts
     stt = STT_Module.STTModule()
     stt.setAudioType(1)
     stt.noTalkingSetting()
@@ -140,8 +154,6 @@ def phonecall(request):
     studendID = stt.sttResult
     query = "SELECT * FROM STUDENTINFO WHERE studentID = " + studendID + ";"
     cursor = connection.cursor()
-    del stt
-    del tts 
     try:
         cursor.execute(query)
         studentInfo = cursor.fetchone()
@@ -154,7 +166,7 @@ def phonecall(request):
     except:
         context={
         'username':user_name,
-        'user_id' : '2014112106',
+        'user_id' : '2016112099',
         }
         return JsonResponse(context)
     
@@ -166,6 +178,8 @@ def outbound(request):
         otb = models.outBoundClass()
         otb.date = request.GET.get("date")
         result = otb.searchDate()
+        otb.point = 0
+        otb.readPoint = -1
         context = {"otb": otb}
         return render(request, 'CallCenter/outbound.html', context)
     elif request.method == 'GET' and request.GET.get("selected") != None:
@@ -173,6 +187,18 @@ def outbound(request):
         otb.point = int(request.GET.get("data"))
         otb.text = otb.result[int(request.GET.get("data"))]
         context = {"otb": otb}
+        return render(request, 'CallCenter/outbound.html', context)
+    elif request.method == 'GET' and (request.GET.get("listed") != None or request.GET.get("next") != None):
+        otb.step = 2
+        otb.point = -1
+        result1, result2, sum, now = otb.getNextSendList(1)
+        context = {"otb": otb, "tel": result1, "text" : result2, "sum": sum, "now": now}
+        return render(request, 'CallCenter/outbound.html', context)
+    elif request.method == 'GET' and request.GET.get("prev") != None:
+        otb.step = 2
+        otb.point = -1
+        result1, result2, sum, now = otb.getNextSendList(-1)
+        context = {"otb": otb, "tel": result1, "text" : result2, "sum": sum, "now": now}
         return render(request, 'CallCenter/outbound.html', context)
     elif request.method == 'GET' and request.GET.get("tagInfo") != None:
         if request.GET.get("add") != None:
@@ -182,7 +208,6 @@ def outbound(request):
         elif request.GET.get("update") != None:
             result = otb.updateOutBound(request.GET.get("text"))
         otb.step = 1
-        print(str(request.GET.get("text")))
         return render(request, 'CallCenter/outbound.html', {})
     else:
         return render(request, 'CallCenter/outbound.html', {})

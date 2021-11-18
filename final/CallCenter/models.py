@@ -68,6 +68,7 @@ class outBoundClass():
         self.result = None
         self.point = None
         self.step = 1
+        self.readPoint = -1
 
     def searchDate(self):
         cur = connection.cursor()
@@ -112,3 +113,24 @@ class outBoundClass():
         except Exception as e:
             print(e)
             return False
+
+    def getNextSendList(self, direction):
+        self.readPoint += direction
+
+        cur = connection.cursor()
+        query = "SELECT DISTINCT text FROM AICALLCENTER.OUTBOUNDDB where date = '" + self.date + "'"
+        cur.execute(query)
+        sList = cur.fetchall()
+
+        if self.readPoint < len(sList) and self.readPoint >= 0:
+            sendTarget = sList[self.readPoint][0]
+        elif self.readPoint >= len(sList):
+            sendTarget = sList[self.readPoint-1][0]
+            self.readPoint -= 1
+        else:
+            sendTarget = sList[self.readPoint+1][0]
+            self.readPoint += 1
+
+        query = "SELECT DISTINCT tel FROM AICALLCENTER.OUTBOUNDDB where date = '" + self.date + "' and text = '" + sendTarget + "'"
+        cur.execute(query)
+        return cur.fetchall() , sendTarget, len(sList), self.readPoint+1
